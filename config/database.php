@@ -48,12 +48,19 @@ return [
             'search_path' => 'public',
             'sslmode' => 'prefer',
         ],
-        'sqlite' => [
-            'driver' => 'sqlite',
+        'pgsql_testing' => [
+            'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'host' => env('DB_HOST','microservice_db_testing'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'microservice_db_testing'),
+            'username' => env('DB_USERNAME', 'user'),
+            'password' => env('DB_PASSWORD', 'secret'),
+            'charset' => 'utf8',
             'prefix' => '',
-            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
         ],
     ],
 

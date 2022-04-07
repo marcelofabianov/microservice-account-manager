@@ -4,10 +4,16 @@ namespace Tests\Feature;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Testing\TestResponse;
 
 trait Auth
 {
-    public function login($id = null, $secret = null)
+    /**
+     * @param int|null $id
+     * @param string|null $secret
+     * @return TestResponse
+     */
+    public function login(int $id = null, string $secret = null): TestResponse
     {
         Artisan::call('passport:install');
 
@@ -28,11 +34,15 @@ trait Auth
         return $this->postJson('/oauth/token', $data, $headers);
     }
 
-    public function loginToken()
+    public function getHeadersAuthorization(): array
     {
         $response = $this->login();
-
         $json = $response->json();
-        return $json['token'];
+
+        return [
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer '.$json['access_token']
+        ];
     }
 }

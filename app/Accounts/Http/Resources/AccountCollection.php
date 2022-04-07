@@ -8,7 +8,7 @@ final class AccountCollection extends ResourceCollection
 {
     public function toArray($request): array
     {
-        $json = ['type' => ''];
+        $json = ['type' => 'Accounts'];
         $json['data'] = $this->collection;
 
         if ($request->get('links') == true) {
