@@ -5,15 +5,16 @@ namespace Tests\Feature;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Testing\TestResponse;
+use JetBrains\PhpStorm\ArrayShape;
 
-trait Auth
+trait OAuth
 {
     /**
      * @param int|null $id
      * @param string|null $secret
      * @return TestResponse
      */
-    public function login(int $id = null, string $secret = null): TestResponse
+    public function oauth(int $id = null, string $secret = null): TestResponse
     {
         Artisan::call('passport:install');
 
@@ -34,9 +35,10 @@ trait Auth
         return $this->postJson('/oauth/token', $data, $headers);
     }
 
+    #[ArrayShape(['Accept' => "string", 'Content-Type' => "string", 'Authorization' => "string"])]
     public function getHeadersAuthorization(): array
     {
-        $response = $this->login();
+        $response = $this->oauth();
         $json = $response->json();
 
         return [

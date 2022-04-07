@@ -8,20 +8,17 @@ use Tests\TestCase;
 class AuthTest extends TestCase
 {
     use RefreshDatabase;
-    use Auth;
+    use OAuth;
 
     public function test_authorized_user_trying_to_authenticate()
     {
-        $response = $this->login();
-
-        $response->assertOk();
-        $response->assertJsonFragment(['token_type' => 'Bearer']);
+        $this->oauth()
+            ->assertOk()
+            ->assertJsonFragment(['token_type' => 'Bearer']);
     }
 
     public function test_unauthorized_user_trying_to_login()
     {
-        $response = $this->login(rand(100, 1000), md5(time()));
-
-        $response->assertStatus(401);
+        $this->oauth(rand(100, 1000), md5(time()))->assertUnauthorized();
     }
 }

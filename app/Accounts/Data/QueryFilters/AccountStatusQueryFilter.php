@@ -19,8 +19,8 @@ final class AccountStatusQueryFilter extends BaseQueryFilter implements QueryFil
     * @param  $data
     * @return QueryBuilder
     */
-   public function apply(QueryBuilder $queryBuilder, $data): QueryBuilder
-   {
+    public function apply(QueryBuilder $queryBuilder, $data): QueryBuilder
+    {
         return $queryBuilder->where($this->translate->getAttributeSource('status'), $data);
     }
 }

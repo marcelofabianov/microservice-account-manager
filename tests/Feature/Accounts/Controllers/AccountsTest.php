@@ -1,26 +1,32 @@
 <?php
 
-namespace Tests\Feature\Accounts;
+namespace Tests\Feature\Accounts\Controllers;
 
 use App\Accounts\Data\Models\Account;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\Feature\Auth;
+use Tests\Feature\OAuth;
 use Tests\TestCase;
+use function env;
 
-class CreateAccountTest extends TestCase
+/**
+ * Test blackbox
+ */
+class AccountsTest extends TestCase
 {
     use RefreshDatabase;
-    use Auth;
+    use OAuth;
     use WithFaker;
     use DatabaseMigrations;
 
-    public function test_account_registration()
+    public function test_list_of_accounts()
     {
         Account::factory()->create();
 
         $response = $this->get(env('API_URL').'/accounts', $this->getHeadersAuthorization());
+
+        //dd($response->json());
 
         $response->assertOk();
     }

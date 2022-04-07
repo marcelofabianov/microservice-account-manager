@@ -13,6 +13,7 @@
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
         "marcelofabianov/microservice-builder": "^1.2",
+        "squizlabs/php_codesniffer": "^3.6",
         "yajra/laravel-oci8": "^9.0"
     },
     "require-dev": {
