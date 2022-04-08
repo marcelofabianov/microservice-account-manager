@@ -7,13 +7,11 @@ use App\Accounts\Services\CreateAccountService;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Tests\Feature\OAuth;
 use Tests\TestCase;
 
 class CreateAccountServiceTest extends TestCase
 {
     use RefreshDatabase;
-    use OAuth;
     use WithFaker;
     use DatabaseMigrations;
 
@@ -38,7 +36,7 @@ class CreateAccountServiceTest extends TestCase
 
         $expected = $data;
 
-        $expected['id'] = $reality['id'];
+        $expected['id'] = 1;
         $expected['status'] = (DefaultAccountStatusBusiness::get())->value;
         $expected['createdAt'] = $reality['createdAt'];
         $expected['updatedAt'] = $reality['updatedAt'];
