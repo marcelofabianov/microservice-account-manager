@@ -27,6 +27,7 @@ trait OAuth
             'client_id' => $id ?? $client->id,
             'client_secret' => $secret ?? $client->secret,
         ];
+
         $headers = [
             'Accept' => 'application/json',
             'Content-Type' => 'application/json'

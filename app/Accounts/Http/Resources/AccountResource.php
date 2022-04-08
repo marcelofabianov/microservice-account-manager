@@ -23,14 +23,17 @@ final class AccountResource extends JsonResource
             'updatedAt' => (Carbon::parse($this->updatedAt))->toIso8601String(),
         ];
 
-        if ($request->get('relationships') == true) {
-            $json['relationships'] = [
-                'users' => [
-                    'links' => [
-                        'related' => 'api/accounts/' . $this->id . '/users'
-                    ]
-                ],
-            ];
+        if ($request->has('relationships')) {
+            $json['relationships'] = [];
+            if (in_array('users', $request->get('relationships'))) {
+                $json['relationships'] = [
+                    'users' => [
+                        'links' => [
+                            'related' => 'api/accounts/' . $this->id . '/users'
+                        ]
+                    ],
+                ];
+            }
         }
 
         if ($request->get('links') == true) {

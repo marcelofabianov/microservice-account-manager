@@ -33,7 +33,7 @@ class RouteServiceProvider extends ServiceProvider
                 return response()->json([]);
             });
 
-            Route::prefix('api/v1')
+            Route::prefix('api/account-manager/v1')
                 ->as('api.')
                 ->middleware(['api', 'client_credentials'])
                 ->group(base_path('routes/api.php'));
