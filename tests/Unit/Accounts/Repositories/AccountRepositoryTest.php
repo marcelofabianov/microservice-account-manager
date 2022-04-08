@@ -6,10 +6,19 @@ use App\Accounts\Data\DtoTranslate\AccountDtoTranslate;
 use App\Accounts\Data\Enums\AccountStatusEnum;
 use App\Accounts\Data\Models\Account;
 use App\Accounts\Data\Repositories\AccountRepository;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\Feature\OAuth;
 use Tests\TestCase;
 
 class AccountRepositoryTest extends TestCase
 {
+    use RefreshDatabase;
+    use OAuth;
+    use WithFaker;
+    use DatabaseMigrations;
+
     /**
      * @test
      */
