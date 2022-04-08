@@ -7,7 +7,7 @@ use App\Accounts\Http\Resources\AccountResource;
 use Core\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 
-final class AccountController extends Controller
+final class FindAccountController extends Controller
 {
     /**
      * @param int $id

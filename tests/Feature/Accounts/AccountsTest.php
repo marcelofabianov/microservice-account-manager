@@ -7,10 +7,8 @@ use App\Accounts\Data\Models\Account;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use ReflectionException;
 use Tests\Feature\OAuth;
 use Tests\TestCase;
-use Throwable;
 use function env;
 
 /**
@@ -34,7 +32,6 @@ class AccountsTest extends TestCase
         $received = $this->get(env('API_URL') . '/accounts', $this->getHeadersAuthorization());
 
         $expected = [
-            'type' => 'Accounts',
             'data' => [
                 [
                     'account' => [
@@ -83,7 +80,6 @@ class AccountsTest extends TestCase
         $received = $this->get(env('API_URL') . '/accounts?status=2', $this->getHeadersAuthorization());
 
         $expected = [
-            'type' => 'Accounts',
             'data' => [
                 [
                     'account' => [
@@ -132,7 +128,6 @@ class AccountsTest extends TestCase
         $received = $this->get(env('API_URL') . '/accounts?relationships[]=users', $this->getHeadersAuthorization());
 
         $expected = [
-            'type' => 'Accounts',
             'data' => [
                 [
                     'account' => [
@@ -188,7 +183,6 @@ class AccountsTest extends TestCase
         $received = $this->get(env('API_URL') . '/accounts?links=true', $this->getHeadersAuthorization());
 
         $expected = [
-            'type' => 'Accounts',
             'data' => [
                 [
                     'account' => [
