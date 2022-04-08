@@ -5,7 +5,7 @@ namespace App\Accounts\Http\Controllers;
 use App\Accounts\Data\DtoTranslate\AccountDtoTranslate;
 use App\Accounts\Http\Requests\CreateAccountRequest;
 use App\Accounts\Http\Resources\AccountResource;
-use App\Accounts\Service\CreateAccountService;
+use App\Accounts\Services\CreateAccountService;
 use Core\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;

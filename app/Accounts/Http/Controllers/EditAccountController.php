@@ -6,7 +6,7 @@ use App\Accounts\Data\DtoTranslate\AccountDtoTranslate;
 use App\Accounts\Data\Repositories\AccountRepository;
 use App\Accounts\Http\Requests\EditAccountRequest;
 use App\Accounts\Http\Resources\AccountResource;
-use App\Accounts\Service\EditAccountService;
+use App\Accounts\Services\EditAccountService;
 use Core\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

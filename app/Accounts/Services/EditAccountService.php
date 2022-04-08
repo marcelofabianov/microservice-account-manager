@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Accounts\Service;
+namespace App\Accounts\Services;
 
-use App\Accounts\Business\DefaultAccountStatusBusiness;
 use App\Accounts\Data\Dto\AccountDto;
 use App\Accounts\Data\Enums\AccountStatusEnum;
-use App\Accounts\Data\Repositories\CreateAccountRepository;
+use App\Accounts\Data\Repositories\EditAccountRepository;
 use Carbon\Carbon;
 use Marcelofabianov\MicroServiceBuilder\Service\BaseService;
 use ReflectionException;
 use Throwable;
 
-final class CreateAccountService extends BaseService
+final class EditAccountService extends BaseService
 {
     /**
      * @return array
+     * @throws ReflectionException
+     * @throws Throwable
      */
     public function execute(): array
     {
@@ -26,24 +27,20 @@ final class CreateAccountService extends BaseService
             'address' => $this->data['address'],
             'addressNumber' => $this->data['addressNumber'],
             'addressComplement' => $this->data['addressComplement'],
-            'createdAt' => Carbon::now(),
-            'updatedAt' => Carbon::now()
+            'updatedAt' => Carbon::now(),
+            'createdAt' => Carbon::parse($this->dataUpdate['createdAt'])
         ];
 
-        $data['status'] = DefaultAccountStatusBusiness::get();
+        $data['status'] = AccountStatusEnum::from($this->dataUpdate['status']);
 
         if (isset($this->data['status'])) {
             $data['status'] = AccountStatusEnum::from($this->data['status']);
         }
 
-        try {
-            $account = AccountDto::from($data);
-        } catch (ReflectionException|Throwable $e) {
-            dd($e);
-        }
+        $account = AccountDto::from($data);
 
-        $repository = new CreateAccountRepository();
+        $repository = new EditAccountRepository();
 
-        return $repository->save($account);
+        return $repository->save($account, $this->id);
     }
 }

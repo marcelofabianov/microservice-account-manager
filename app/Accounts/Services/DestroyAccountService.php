@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Accounts\Service;
+namespace App\Accounts\Services;
 
 use Marcelofabianov\MicroServiceBuilder\Service\BaseService;
 
