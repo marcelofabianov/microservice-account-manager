@@ -11,10 +11,6 @@ final class AccountCollection extends ResourceCollection
         $json = ['type' => 'Accounts'];
         $json['data'] = $this->collection;
 
-        if ($request->get('links') == true) {
-            $json['links'] = ['self' => ''];
-        }
-
         return $json;
     }
 }

@@ -185,7 +185,7 @@ class AccountsTest extends TestCase
         $account = Account::factory()->create();
         $account = AccountDtoTranslate::instance()->translateSourceFromDto($account->toArray());
 
-        $received = $this->get(env('API_URL') . '/accounts?relationships[]=users', $this->getHeadersAuthorization());
+        $received = $this->get(env('API_URL') . '/accounts?links=true', $this->getHeadersAuthorization());
 
         $expected = [
             'type' => 'Accounts',
@@ -228,9 +228,4 @@ class AccountsTest extends TestCase
 
         $this->assertEquals($expected, $received->json());
     }
-//
-//    public function listOfAccountsThatContainAllParameters()
-//    {
-//        //
-//    }
 }

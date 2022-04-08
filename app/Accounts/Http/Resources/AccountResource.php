@@ -39,7 +39,7 @@ final class AccountResource extends JsonResource
         }
 
         if ($request->get('links') == true) {
-            $json['links'] = ['self' => route('api.accounts.index')];
+            $json['links'] = ['self' => route('api.accounts.show', $this->id)];
         }
 
         return $json;
