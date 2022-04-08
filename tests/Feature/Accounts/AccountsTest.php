@@ -25,10 +25,11 @@ class AccountsTest extends TestCase
     use DatabaseMigrations;
 
     /**
+     * @test
      * @throws ReflectionException
      * @throws Throwable
      */
-    public function test_list_of_accounts_that_contain_paginate()
+    public function listOfAccountsThatContain()
     {
         $account = Account::factory()->create();
         $account = AccountDtoTranslate::instance()->translateSourceFromDto($account->toArray());
@@ -72,23 +73,23 @@ class AccountsTest extends TestCase
         $this->assertEquals($expected, $received->json());
     }
 
-    public function test_list_of_accounts_that_contain_status_parameter()
-    {
-        //
-    }
-
-    public function test_list_of_accounts_that_contain_relationship_parameter()
-    {
-        //
-    }
-
-    public function test_list_of_accounts_that_contain_links_parameter()
-    {
-        //
-    }
-
-    public function test_list_of_accounts_that_contain_all_parameters()
-    {
-        //
-    }
+//    public function test_list_of_accounts_that_contain_status_parameter()
+//    {
+//        //
+//    }
+//
+//    public function test_list_of_accounts_that_contain_relationship_parameter()
+//    {
+//        //
+//    }
+//
+//    public function test_list_of_accounts_that_contain_links_parameter()
+//    {
+//        //
+//    }
+//
+//    public function test_list_of_accounts_that_contain_all_parameters()
+//    {
+//        //
+//    }
 }
