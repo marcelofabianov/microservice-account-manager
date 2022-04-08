@@ -18,11 +18,7 @@ class AccountRepositoryTest extends TestCase
         $account = Account::factory()->create()->toArray();
         $account = AccountDtoTranslate::instance()->translateSourceFromDto($account);
 
-        $repository = new AccountRepository();
-        $repository = $repository->accounts()->get();
-        $expected = $repository->first();
-
-        $actual = (object) [
+        $expected = (object) [
             'id' => $account->id,
             'createdAt' => $account->createdAt->format('Y-m-d H:i:s'),
             'updatedAt' => $account->updatedAt->format('Y-m-d H:i:s'),
@@ -36,7 +32,10 @@ class AccountRepositoryTest extends TestCase
             'addressComplement' => $account->addressComplement,
         ];
 
-        $this->assertEquals($expected, $actual);
+        $repository = new AccountRepository();
+        $actual = $repository->accounts()->get();
+
+        $this->assertEquals(collect([$expected]), $actual);
     }
 
     /**
@@ -47,11 +46,38 @@ class AccountRepositoryTest extends TestCase
         $account = Account::factory()->create(['conta_status' => 1])->toArray();
         $account = AccountDtoTranslate::instance()->translateSourceFromDto($account);
 
+        $expected = (object) [
+            'id' => $account->id,
+            'createdAt' => $account->createdAt->format('Y-m-d H:i:s'),
+            'updatedAt' => $account->updatedAt->format('Y-m-d H:i:s'),
+            'document' => $account->document,
+            'name' => $account->name,
+            'email' => $account->email,
+            'phone' => $account->phone,
+            'status' => $account->status->value,
+            'address' => $account->address,
+            'addressNumber' => $account->addressNumber,
+            'addressComplement' => $account->addressComplement,
+        ];
+
         $status = AccountStatusEnum::from(1);
 
         $repository = new AccountRepository();
-        $repository = $repository->accounts($status)->get();
-        $expected = $repository->first();
+        $actual = $repository->accounts($status)->get();
+
+        $this->assertEquals(collect([$expected]), $actual);
+    }
+
+    /**
+     * @test
+     */
+    public function findAccountById()
+    {
+        $account = Account::factory()->create()->toArray();
+        $account = AccountDtoTranslate::instance()->translateSourceFromDto($account);
+
+        $repository = new AccountRepository();
+        $expected = $repository->find($account->id);
 
         $actual = (object) [
             'id' => $account->id,
